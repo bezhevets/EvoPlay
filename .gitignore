@@ -1,0 +1,13 @@
+/test_code.py
+/.venv/
+__pycache__
+results
+.idea
+.idea/
+.vscode/
+*.iml
+.env
+.DS_Store
+.pytest_cache/
+**__pycache__/
+pyproject.toml
