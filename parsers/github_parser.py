@@ -6,8 +6,18 @@ import aiohttp
 
 
 class GitHubParser:
+    """
+    Parses HTML content from GitHub search results.
+    """
+
     @staticmethod
     async def fetch_url_content(session: aiohttp.ClientSession, url: str, proxy: str, timeout: int = 100) -> str | None:
+        """
+        Fetches the content of a URL using a given session and proxy.
+
+        Returns:
+            str | None: The response text if successful, or None if the request fails.
+        """
         try:
             async with session.get(url, proxy=proxy, timeout=timeout) as response:
                 if response.status == 200:
@@ -18,6 +28,12 @@ class GitHubParser:
             return None
 
     async def get_languages(self, links: str, session: aiohttp.ClientSession, proxy: str) -> dict:
+        """
+        Extracts programming languages from a repository page.
+
+        Returns:
+            dict: A dictionary of programming languages and their usage percentages.
+        """
         content = await self.fetch_url_content(session, links, proxy)
         if not content:
             return {}
@@ -29,6 +45,12 @@ class GitHubParser:
         return result
 
     async def extra_info_for_repositories(self, links: list, session: aiohttp.ClientSession, proxy: str) -> list:
+        """
+        Gathers extra information for a list of repository links.
+
+        Returns:
+            list: A list of dictionaries containing the repository URL, owner, and languages.
+        """
         parsed_results = []
         for link in links:
             try:
@@ -46,6 +68,15 @@ class GitHubParser:
 
     @staticmethod
     def process_non_repo_links(results: list, search_type: str) -> list:
+        """
+        Processes json (list of dictionaries) to get urls
+
+        Returns:
+            list: A list of formatted URLs for issues or wikis.
+
+        Raises:
+            ValueError: If the search_type is invalid.
+        """
         if search_type == "issues":
             links = [
                 f"/{res['repo']['repository']['owner_login']}/{res['repo']['repository']['name']}/issues/{res['number']}"
@@ -61,6 +92,12 @@ class GitHubParser:
         return [{"url": "https://github.com" + link} for link in links]
 
     async def parse_html(self, html, session: aiohttp.ClientSession, proxy: str, search_type: str) -> list:
+        """
+        Parses HTML content and extracts relevant information based on the search type.
+
+        Returns:
+            list: A list of parsed results.
+        """
         soup = BeautifulSoup(html, "html.parser")
         script_tag = soup.select_one("script[data-target='react-app.embeddedData']")
         if script_tag:

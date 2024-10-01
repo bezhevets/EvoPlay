@@ -7,7 +7,14 @@ from parsers.github_parser import GitHubParser
 
 
 class GitHubCrawler:
-    def __init__(self, keywords, proxies, search_type):
+    """
+    Orchestrates the crawling process to search GitHub based on keywords.
+    """
+
+    def __init__(self, keywords: list, proxies: list, search_type: str) -> None:
+        """
+        Initializes the GitHubCrawler with keywords, proxies, and search type.
+        """
         self.keywords = "+".join(keywords)
         self.proxies = proxies
         self.search_type = search_type.lower()
@@ -15,6 +22,12 @@ class GitHubCrawler:
         self.proxy_manager = ProxyManager(proxies)
 
     async def fetch_results(self) -> list:
+        """
+        Fetches search results from GitHub using a random proxy.
+
+        Returns:
+            list: The search results as a list of dictionaries.
+        """
         search_url = self.base_url.format(self.keywords, self.search_type)
         max_retries = len(self.proxies) + 1
         attempts = 0
@@ -37,5 +50,8 @@ class GitHubCrawler:
         return []
 
     async def crawl(self) -> list:
+        """
+        Initiates the crawling process.
+        """
         results = await self.fetch_results()
         return results

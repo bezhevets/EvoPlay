@@ -9,6 +9,11 @@ setup_logging()
 
 
 async def main():
+    """
+    The main asynchronous function that initializes the crawler and fetches results.
+
+    The result is saved to a json file.
+    """
     logging.info("Starting crawler...")
     data = load_json_file("data.json")
     crawler = GitHubCrawler(**data)
