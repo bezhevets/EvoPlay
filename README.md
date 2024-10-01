@@ -7,12 +7,16 @@ You can find the task requirements in this file. [assignment.pdf](assignment.pdf
 ___
 ## Table of Contents
 - [Features](#features)
+- [Project structure](#project-structure-and-content)
 - [Installation Git](#installation)
 
 ---
 ### Features:
-Project structure and content:
-
+1. **Random use of a proxy server from the specified list.**
+2. **Generates a random User-Agent header**
+3. **Use of logging.**
+---
+### Project structure and content:
 ```
 .
 ├── managers                            # Manages proxies and User-Agent headers for the crawler.
@@ -34,10 +38,6 @@ Project structure and content:
 ├── main.py                             # Project startup file.
 └── requirements.txt                    # Required dependencies.
 ```
-
-1. **Random use of a proxy server from the specified list.**
-2. **Generates a random User-Agent header**
-3. **Use of logging.**
 ---
 ## Installation
 
