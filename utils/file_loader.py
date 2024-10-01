@@ -17,6 +17,14 @@ def load_json_file(file_path: str) -> dict:
 
 
 def save_results_to_json(results: list, filename: str = "results.json") -> None:
+    """
+    Saves the provided results to a JSON file.
+
+    This function takes a list of results and saves them to a specified JSON file.
+    If no filename is provided, the default filename 'results.json' is used.
+
+    Logs the absolute path of the saved JSON file to the logging system.
+    """
     with open(filename, "w", encoding="utf-8") as file:
         json.dump(results, file, ensure_ascii=False, indent=2)
     log_file_path = os.path.abspath("results.json")
