@@ -16,6 +16,8 @@ async def main():
     """
     logging.info("Starting crawler...")
     data = load_json_file("data.json")
+    if not data:
+        return
     crawler = GitHubCrawler(**data)
     results = await crawler.crawl()
     save_results_to_json(results)
