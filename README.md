@@ -62,7 +62,8 @@ ___
     pip install -r requirements.txt
    ```
 6. Write data to the `data.json` file or use the input data from the `data.json` file. [Go to data.json](data.json)
-6. Run the script using the following command::
+   - **IMPORTANT:** Proxy servers in the file are available until 02.10.24
+7. Run the script using the following command::
     ```
    python main.py
     ```
